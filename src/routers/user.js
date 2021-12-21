@@ -18,10 +18,9 @@ const upload = require('../middleware/multer')
 // Create User ------------------
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
-
     try {
         await user.save()
-        sendingWelcomeEmail(user.email, user.name)
+        // sendingWelcomeEmail(user.email, user.name)
         const token = await user.generateAuthToken()
         res.status(201).send({ user, token })
     
@@ -65,7 +64,7 @@ router.delete('/users/me', auth, async (req, res) => {
 
     try {
         await req.user.remove()
-        sendingGoodByeEmail(req.user.email, req.user.name)
+        // sendingGoodByeEmail(req.user.email, req.user.name)
         res.send(req.user)
     
     } catch (e) {
